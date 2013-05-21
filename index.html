@@ -63,6 +63,35 @@
 			};
 
 			var map = new google.maps.Map(document.getElementById("map-canvas"),mapoptions);
+            
+            jQuery.getJSON("http://gasored.herokuapp.com/gas_stations.json", function(data){
+               gasolineras= new Array(data.length);
+               posgas= new Array(data.length);
+               infowindow= new Array(data.length);
+               gas= new Array(data.length);
+               botones= new Array(gas.length);
+               
+               
+               for(x = 0; x <= data.length; x++){
+               gas[x]= data[x];
+               posgas[x]= new google.maps.LatLng(data[x].latitud,data[x].longitud);
+               
+               gasolineras[x] = new google.maps.Marker({
+                                                       position: posgas[x],
+                                                       map: map,
+                                                       icon: "img/gas-marker.png"
+                                                       })
+               botones[x] = '<h3>'+data[x].nombre+'</h3><p>'+data[x].direccion+'</p>'+
+               '<p>'+
+               '<a id="detalles" href="#page3" data-role="button" data-mini="true" data-inline="true">Detalles</a> <a href="#" data-role="button" data-mini="true" data-inline="true">¿Como llegar?</a>'+
+               '</p>';
+               infowindow[x] = new google.maps.InfoWindow({
+                                                          content: ''+botones[x]
+                                                          });
+               
+               makeInfoWindowEvent(map, infowindow[x], gasolineras[x]);
+               }
+           });
 
 			var yourMarker = new google.maps.Marker({
 				position: currentposition,
@@ -74,36 +103,7 @@
 				content: 'Tu estas aqui :)'
 			});
 			makeInfoWindowEvent(map, yourInfowindow, yourMarker);
-
-			jQuery.getJSON("http://gasored.herokuapp.com/gas_stations.json", function(data){
-				gasolineras= new Array(data.length);
-				posgas= new Array(data.length);
-				infowindow= new Array(data.length);
-				gas= new Array(data.length);
-				botones= new Array(gas.length);
-
-
-				for(x = 0; x <= data.length; x++){
-					gas[x]= data[x];
-					posgas[x]= new google.maps.LatLng(data[x].latitud,data[x].longitud);
-
-					gasolineras[x] = new google.maps.Marker({
-						position: posgas[x],
-						map: map,
-						icon: "img/gas-marker.png"
-					})
-					botones[x] = '<h3>'+data[x].nombre+'</h3><p>'+data[x].direccion+'</p>'+
-					'<p>'+
-						'<a id="detalles" href="#page3" data-role="button" data-mini="true" data-inline="true">Detalles</a>'+
-						'<a href="#" data-role="button" data-mini="true" data-inline="true">¿Como llegar?</a>'+
-					'</p>';
-					infowindow[x] = new google.maps.InfoWindow({
-				      content: ''+botones[x]
-				    });
-
-				    makeInfoWindowEvent(map, infowindow[x], gasolineras[x]);
-				}
-			});
+			calculateRoute();
 			
 		}
 
@@ -121,8 +121,8 @@
 		}
 
 		function calculateRoute() {
-
-            var targetDestination =  new google.maps.LatLng(destinationLatitude, destinationLongitude);
+			alert('calcular ruta');
+            /*var targetDestination =  new google.maps.LatLng(destinationLatitude, destinationLongitude);
             if (currentPosition != '' && targetDestination != '') {
 
                 var request = {
@@ -142,7 +142,7 @@
                                 alert(myRoute.steps[i].instructions);
                             }
                         */
-                        $("#results").show();
+                        /*$("#results").show();
                     }
                     else {
                         $("#results").hide();
@@ -151,7 +151,7 @@
             }
             else {
                 $("#results").hide();
-            }
+            }*/
         }
 
 	</script>
