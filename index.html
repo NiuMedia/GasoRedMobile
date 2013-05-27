@@ -34,12 +34,30 @@
 		var idGas;
 		var beneFlag=false;
 		var tipsFlag=false;
+		var mapsFlag=false;
+
 
 		$("#page1").live("pageshow",function(){
-				navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
-			});
+			displayMapa();
+		});
 
 		$("#page4").live("pageshow",function(){
+			displayBeneficios()
+		});
+		
+		$("#page5").live("pageshow",function(){
+			displayTips();
+		});
+
+		function displayMapa(){
+			if(mapsFlag==false){
+				navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
+				mapsFlag=true;
+			}
+		}
+
+
+		function displayBeneficios(){
 			if(beneFlag==false){
 				jQuery("#beneList").empty();
 				
@@ -61,9 +79,10 @@
 				});
 				beneFlag=true;
 			}
-		});
+		}
 
-		$("#page5").live("pageshow",function(){
+
+		function displayTips () {
 			if(tipsFlag==false){
 				jQuery("#tipsList").empty();
 			
@@ -86,10 +105,10 @@
 
 				tipsFlag=true;
 			}
-		});
+		}
 
 			/*$("#page3").live('pageshow', function(){
-				alert(''+idGas);
+				console.log(''+idGas);
 				contenido = $.('<h1>'+gas[idGas].nombre+'</h1>'+
 					'<p>'+gas[idGas].direccion+'</p>');
 				$("#contenido-gas").empty();
@@ -110,48 +129,67 @@
 			};
 
 			var map = new google.maps.Map(document.getElementById("map-canvas"),mapoptions);
-            
-            jQuery.getJSON("http://gasored.herokuapp.com/gas_stations.json", function(data){
-               gasolineras= new Array(data.length);
-               posgas= new Array(data.length);
-               infowindow= new Array(data.length);
-               gas= new Array(data.length);
-               botones= new Array(gas.length);
-               
-               
-               for(x = 0; x <= data.length; x++){
-               gas[x]= data[x];
-               posgas[x]= new google.maps.LatLng(data[x].latitud,data[x].longitud);
-               
-               gasolineras[x] = new google.maps.Marker({
-                   position: posgas[x],
-                   map: map,
-                   icon: "img/gas-marker.png"
-               })
-               botones[x] = '<h3>'+data[x].nombre+'</h3><p>'+data[x].direccion+'</p>'+
-               '<p>'+
-               '<a id="detalles" href="#page3" data-role="button" data-mini="true" data-inline="true">Detalles</a> <a href="#" data-role="button" data-mini="true" data-inline="true">¿Como llegar?</a>'+
-               '</p>';
-               infowindow[x] = new google.maps.InfoWindow({
-                  content: ''+botones[x]
-              	});
-               
-               makeInfoWindowEvent(map, infowindow[x], gasolineras[x]);
-               }
-           });
 
-			var yourMarker = new google.maps.Marker({
-				position: currentposition,
-				map: map,
-				icon: "img/lightblue.png"
-			})
+			jQuery.getJSON("http://gasored.herokuapp.com/gas_stations.json", function(data){
+				gasolineras= new Array(data.length);
+				posgas= new Array(data.length);
+				infowindow= new Array(data.length);
+				gas= new Array(data.length);
+				botones= new Array(gas.length);
 
-			var yourInfowindow = new google.maps.InfoWindow({
-				content: 'Tu estas aqui :)'
+				debug.log('for');
+				for(x = 0; x < gas.length; x++){
+					gas[x]= data[x];
+					posgas[x]= new google.maps.LatLng(gas[x].latitud,gas[x].longitud);
+
+					gasolineras[x] = new google.maps.Marker({
+						position: posgas[x],
+						map: map,
+						icon: "img/gas-marker.png"
+					})
+					botones[x] = '<h3>'+gas[x].nombre+'</h3><p>'+gas[x].direccion+'</p>'+
+					'<p>'+
+					'<a id="detalles" href="#page3" data-role="button" data-mini="true" data-inline="true">Detalles</a> <a href="#" data-role="button" data-mini="true" data-inline="true">¿Como llegar?</a>'+
+					'</p>';
+					infowindow[x] = new google.maps.InfoWindow({
+						content: ''+botones[x]
+					});
+						
+					makeInfoWindowEvent(map, infowindow[x], gasolineras[x]);	
+				}
+				console.log('end for');
+
+			}).done(function(){
+
+				console.log('gasolineras listas');
+				var yourMarker = new google.maps.Marker({
+					position: currentposition,
+					map: map,
+					icon: "img/lightblue.png"
+				})
+				console.log('tu marcador listo');
+
+				var yourInfowindow = new google.maps.InfoWindow({
+					content: 'Tu estas aqui :)'
 			});
-			makeInfoWindowEvent(map, yourInfowindow, yourMarker);
-			calculateRoute();
-			
+
+				console.log('tu marcador listo con infowindow');
+
+				makeInfoWindowEvent(map, yourInfowindow, yourMarker);
+
+				console.log('ya esta');
+				calculateRoute();
+				console.log('calcular ruta ya');
+				showGasId(gas);
+				console.log('showId ruta ya');
+
+			});
+			console.log('si acaba la funcion');
+
+		}
+
+		function showGasId(gas){
+			console.log('id enviado con éxito!!!!'+gas[2].id);
 		}
 
 		
@@ -185,7 +223,7 @@
                         /*
                             var myRoute = response.routes[0].legs[0];
                             for (var i = 0; i < myRoute.steps.length; i++) {
-                                alert(myRoute.steps[i].instructions);
+                                console.log(myRoute.steps[i].instructions);
                             }
                         */
                         /*$("#results").show();
@@ -340,28 +378,28 @@
 					<div class="ui-grid-c">
 						<div class="ui-block-a">
 							<div style="width: 100%; height: 56px; position: relative; background-color: #fbfbfb;">
-								<a href="http://facebook.com">
+								<a href="http://facebook.com/gasored" style="margin:0px auto">
 									<img src="img/facebook-icon.png" alt="facebook" width="56px">
 								</a>
 							</div>
 						</div>
 						<div class="ui-block-b">
 							<div style="width: 100%; height: 56px; position: relative; background-color: #fbfbfb;">
-								<a href="http://twitter.com">
+								<a href="https://twitter.com/gasored" style="margin:0px auto">
 									<img src="img/twitter-icon.png" alt="twitter" width="56px">
 								</a>
 							</div>
 						</div>
 						<div class="ui-block-c">
 							<div style="width: 100%; height: 56px; position: relative; background-color: #fbfbfb;">
-								<a href="http://foursquare.com">
+								<a href="http://foursquare.com" style="margin:0px auto">
 									<img src="img/foursquare-icon.png" alt="foursquare" width="56px">
 								</a>
 							</div>
 						</div>
 						<div class="ui-block-d">
 							<div style="width: 100%; height: 56px; position: relative; background-color: #fbfbfb;">
-								<a href="http://youtube.com">
+								<a href="http://youtube.com" style="margin:0px auto">
 									<img src="img/youtube-icon.png" alt="youtube" width="56px">
 								</a>
 							</div>
