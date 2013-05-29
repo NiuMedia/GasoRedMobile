@@ -162,7 +162,19 @@ function onGeoSuccess(position){
 					google.maps.event.addListener(infowindow[x], 'domready', function() {
 
 						$(".detalles-link").click(function(){
-							console.log($(this).attr("id"));
+
+							element = attr("id");
+							elementoGas = jQuery(
+								"<h2>"+gas[element].nombre+"</h2>"+
+								"<p>"+gas[element].direccion+"</p>"+
+								"<ul data-role\"listview\">"+
+								for(x = 0 ; x < gas[element].features.length ; x++){
+									"<li>gas[element].features[x]</li>"+
+								}
+								"</ul>"+
+    							"<img src=\"https://maps.googleapis.com/maps/api/staticmap?center=Madison, WI&amp;zoom=14&amp;size=288x200&amp;markers=Madison, WI&amp;sensor=false\"
+    			width=\"288\" height=\"200\">");
+							jQuery("#contenido-gas").append(elementoGas).trigger('create');
 							return false;
 						});
 
@@ -300,59 +312,6 @@ function calculateRoute(lon, lat, marker) {
     			</h1>
     		</div>
     		<div id="contenido-gas" data-role="content">
-    			<h2>
-    				Nombre de la gaso
-    			</h2>
-    			<div>
-    				<p>
-    					<span style="background-color: rgb(255, 255, 255); color: rgb(136, 136, 136);">
-    						<em>
-    							<span style="font-size: small;" data-mce-style="font-size: small;">
-    								<b>
-    									Avenida siempre viva #123
-    								</b>
-    							</span>
-    						</em>
-    					</span>
-    				</p>
-    				<p>
-    					<span style="background-color: rgb(255, 255, 255); color: rgb(136, 136, 136);">
-    						<em>
-    							<span style="font-size: small;" data-mce-style="font-size: small;">
-    								<b>
-    									Colonia falsa
-    								</b>
-    							</span>
-    						</em>
-    					</span>
-    				</p>
-    			</div>
-    			<img src="https://maps.googleapis.com/maps/api/staticmap?center=Madison, WI&amp;zoom=14&amp;size=288x200&amp;markers=Madison, WI&amp;sensor=false"
-    			width="288" height="200">
-    			<div>
-    				<p>
-    					<b>
-    						Tarjeta de credito
-    					</b>
-    				</p>
-    			</div>
-    			<div>
-    				<p>
-    					<b>
-    						24 horas
-    					</b>
-    				</p>
-    			</div>
-    			<div>
-    				<p>
-    					<b>
-    						Minisuper
-    					</b>
-    				</p>
-    			</div>
-    			<div style="width: 288px; height: 170px; position: relative; background-color: #fbfbfb; border: 1px solid #b8b8b8;">
-    				<img src="http://codiqa.com/static/images/v2/image.png" alt="image" style="position: absolute; top: 50%; left: 50%; margin-left: -16px; margin-top: -18px">
-    			</div>
     		</div>
     	</div>
     </div>
