@@ -157,7 +157,7 @@ function onGeoSuccess(position){
 					google.maps.event.addListener(infowindow[x], 'domready', function() {
 
 						$(".detalles-link").click(function(){
-
+							jQuery("#contenido-gas").empty();
 							element = attr("id");
 							elementoGas = jQuery(
 								"<h2>"+gas[element].nombre+"</h2>"+
