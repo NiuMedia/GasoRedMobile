@@ -157,6 +157,10 @@ function onGeoSuccess(position){
 						content: ''+botones[x]
 					});
 
+					google.maps.event.trigger(map, "resize");
+					map.setCenter(currentposition);
+					map.setZoom(12);
+
 					google.maps.event.addListener(infowindow[x], 'domready', function() {
 
 					$(".detalles-link").click(function(){
@@ -193,11 +197,11 @@ function onGeoSuccess(position){
 								map2 = new google.maps.Map(div, mapoptions2);
 
 
-								markerGas = new google.maps.Marker({
+								/*markerGas = new google.maps.Marker({
 									position: new google.maps.LatLng( data.latitud, data.longitud ),
 									map: map2,
 									icon: "img/gas-marker.png"
-								});
+								});*/
 
 							});
 
