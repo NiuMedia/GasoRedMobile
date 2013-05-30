@@ -175,7 +175,7 @@ function onGeoSuccess(position){
 
 
 								for(x in data.features){
-										ul.append( "<li>" + data.features[x].nombre + "</li>" );
+									ul.append( "<li>" + data.features[x].nombre + "</li>" );
 								}
 
 								$("#contenido-gas").empty();
@@ -190,7 +190,7 @@ function onGeoSuccess(position){
 									mapTypeId: google.maps.MapTypeId.ROADMAP
 								};
 
-								map2 = new google.maps.Map(document.getElementById("mapa-single"), mapoptions2);
+								map2 = new google.maps.Map(div, mapoptions2);
 
 
 								markerGas = new google.maps.Marker({
