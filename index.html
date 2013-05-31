@@ -44,6 +44,13 @@
 
 		$("#page5").live("pageshow",function(){
 			displayTips();
+			$("#twitter-button").click(function(){
+				alert("Test");
+				window.startapp.start(
+            		{android: 'com.twitter.android'}
+            	);
+            	return false;
+			});
 		});
 
 		function displayMapa(){
@@ -375,7 +382,7 @@ function onGeoError(error){
 			</div>
 			<div class="ui-block-b">
 				<div style="width: 100%; height: 56px; position: relative; background-color: #fbfbfb;">
-					<a href="https://twitter.com/gasored" style="margin:0px auto">
+					<a href="https://twitter.com/gasored" id="twitter-button" style="margin:0px auto">
 						<img src="img/twitter-icon.png" alt="twitter" width="56px">
 					</a>
 				</div>
@@ -418,6 +425,6 @@ function onGeoError(error){
 	</div>
 </div>
 </div>
-<script src="cordova-2.4.0.js"></script>
+<script src="cordova-2.7.0.js"></script>
 </body>
 </html>
