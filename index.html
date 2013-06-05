@@ -180,6 +180,7 @@ function onGeoSuccess(position){
 
 							$.getJSON("http://gasored.herokuapp.com/gas_stations/"+element+".json", function(data){
 
+								img = $("<img id=\"foto-gas\" src=\""+data.foto1+"\" style=\"width:100%;max-width:600px\" />");
 								h2 = $("<h2></h2>");
 								h2.html(data.nombre);
 								p = $("<p></p>");
@@ -192,6 +193,7 @@ function onGeoSuccess(position){
 								}
 
 								$("#contenido-gas").empty();
+								$("#contenido-gas").append(img);
 								$("#contenido-gas").append(h2);
 								$("#contenido-gas").append(p);
 								$("#contenido-gas").append(ul);
