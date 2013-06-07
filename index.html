@@ -308,7 +308,7 @@ function onGeoError(error){
     <body>
     	<!-- Home -->
     	<div data-role="page" id="page1">
-    		<div data-theme="a" data-role="header" data-position="fixed">
+    		<div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
     			<h1>
     				<img src="img/logo-gasored.png" width="100">
     			</h1>
@@ -317,17 +317,17 @@ function onGeoError(error){
     		<div data-role="content">
     			<div id="map-canvas" style="position: absolute;top: 40px;right: 0;bottom: 30px;left: 0;height:100%;width:100%"></div>
     		</div>
-    		<div data-role="footer" data-theme="a" data-position="fixed">
-    			<div data-role="navbar" data-iconpos="top">
+    		<div data-role="footer" data-theme="a" data-position="fixed" data-tap-toggle="false">
+    			<div data-role="navbar">
     				<ul>
     					<li>
-    						<a class="ui-btn-active ui-state-persist" href="#page1" data-transition="fade" data-theme="a" data-icon="custom">Mapa</a>
+    						<a id="mapa" class="ui-btn-active ui-state-persist" href="#page1" data-transition="fade" data-theme="a"><img src="img/mapa_64.png" width="32px"></a>
     					</li>
     					<li>
-    						<a href="#page5" data-transition="fade" data-theme="a" data-icon="custom">Gaso Tips</a>
+    						<a id="gasotips" href="#page5" data-transition="fade" data-theme="a"><img src="img/gasotips_64.png" width="32px"></a>
     					</li>
     					<li>
-    						<a href="#page4" data-transition="fade" data-theme="a" data-icon="custom">Beneficios</a>
+    						<a id="beneficios" href="#page4" data-transition="fade" data-theme="a"><img src="img/beneficios_64.png" width="32px"></a>
     					</li>
     				</ul>
     			</div>
@@ -337,7 +337,7 @@ function onGeoError(error){
 
     	<!-- Gasolinera -->
     	<div data-role="page" id="page3">
-    		<div data-theme="a" data-role="header" data-position="fixed">
+    		<div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
     			<a class="ui-btn-left" href="#page1" data-transition="slidedown" data-icon="arrow-l" data-theme="a">Volver</a>
     			<h1>
     				<img src="img/logo-gasored.png" width="100">
@@ -350,7 +350,7 @@ function onGeoError(error){
 
     <!-- + Beneficios -->
     <div data-role="page" id="page4">
-    	<div data-theme="a" data-role="header" data-position="fixed">
+    	<div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
     		<h1>
     			<img src="img/logo-gasored.png" width="100">
     		</h1>
@@ -364,26 +364,26 @@ function onGeoError(error){
 
     		</ul>
     	</div>
-    	<div data-role="footer" data-theme="a" data-position="fixed">
-    		<div data-role="navbar" data-iconpos="top">
-    			<ul>
-    				<li>
-    					<a href="#page1" data-transition="fade" data-theme="a" data-icon="custom">Mapa</a>
-    				</li>
-    				<li>
-    					<a  href="#page5" data-transition="fade" data-theme="a" data-icon="custom">Gaso Tips</a>
-    				</li>
-    				<li>
-    					<a class="ui-btn-active ui-state-persist" href="#page4" data-transition="fade" data-theme="a" data-icon="custom">Beneficios</a>
-    				</li>
-    			</ul>
-    		</div>
-    	</div>
+    	<div data-role="footer" data-theme="a" data-position="fixed" data-tap-toggle="false">
+			<div data-role="navbar">
+				<ul>
+					<li>
+						<a id="mapa" href="#page1" data-transition="fade" data-theme="a"><img src="img/mapa_64.png" width="32px"></a>
+					</li>
+					<li>
+						<a id="gasotips" href="#page5" data-transition="fade" data-theme="a"><img src="img/gasotips_64.png" width="32px"></a>
+					</li>
+					<li>
+						<a id="beneficios" class="ui-btn-active ui-state-persist" href="#page4" data-transition="fade" data-theme="a"><img src="img/beneficios_64.png" width="32px"></a>
+					</li>
+				</ul>
+			</div>
+		</div>
     </div>
 </div>
 <!-- Redes sociales -->
 <div data-role="page" id="page5">
-	<div data-theme="a" data-role="header" data-position="fixed">
+	<div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
 		<h1>
 			<img src="img/logo-gasored.png" width="100">
 		</h1>
@@ -426,17 +426,17 @@ function onGeoError(error){
 		<ul id="tipsList" data-role="listview" style="margin: 0px;" data-theme="d">
 		</ul>
 	</div>
-	<div data-role="footer" data-theme="a" data-position="fixed">
-		<div data-role="navbar" data-iconpos="top">
+	<div data-role="footer" data-theme="a" data-position="fixed" data-tap-toggle="false">
+		<div data-role="navbar">
 			<ul>
 				<li>
-					<a href="#page1" data-transition="fade" data-theme="a" data-icon="custom">Mapa</a>
+					<a id="mapa" href="#page1" data-transition="fade" data-theme="a"><img src="img/mapa_64.png" width="32px"></a>
 				</li>
 				<li>
-					<a class="ui-btn-active ui-state-persist" href="#page5" data-transition="fade" data-theme="a" data-icon="custom">Gaso Tips</a>
+					<a id="gasotips" class="ui-btn-active ui-state-persist" href="#page5" data-transition="fade" data-theme="a"><img src="img/gasotips_64.png" width="32px"></a>
 				</li>
 				<li>
-					<a href="#page4" data-transition="fade" data-theme="a" data-icon="custom">Beneficios</a>
+					<a id="beneficios" href="#page4" data-transition="fade" data-theme="a"><img src="img/beneficios_64.png" width="32px"></a>
 				</li>
 			</ul>
 		</div>

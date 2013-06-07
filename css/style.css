@@ -2,3 +2,12 @@
 	width: 100%;
 	max-width: 600px;
 }
+#mapa{
+	background: url('../img/mapa_64.png');
+}
+#gasotips{
+	background: url('../img/gasotips_64.png');
+}
+#beneficios{
+	background: url('../img/beneficios_64.png');	
+}
