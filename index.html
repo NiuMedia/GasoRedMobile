@@ -35,7 +35,7 @@
 		var allCharged=false;
 
 
-		$("#page1").live("pageshow",function(){
+		$("#page1").live("pageshow",function(){ 
 			displayMapa();
 			$("#refresh-home").click(function(){
 				mapsFlag=false;
@@ -59,6 +59,11 @@
 				jQuery("#tipsList").empty();
 				displayTips();
 			});*/
+		});
+
+		jQuery("#regreso").live('tap',function(event){
+			$("map-canvas").empty();
+			mapsFlag=false;
 		});
 
 		function displayMapa(){
@@ -124,13 +129,14 @@ function onGeoSuccess(position){
 			lat = position.coords.latitude;
 			lon = position.coords.longitude;
 			var currentposition = new google.maps.LatLng(lat,lon);
+			var positionSanLuis = new google.maps.LatLng(22.156456,-100.985483);
 			var directionsService = new google.maps.DirectionsService();
 
 			directionsDisplay = new google.maps.DirectionsRenderer();
 
 			var mapoptions = {
 				zoom: 12,
-				center: currentposition,
+				center: positionSanLuis,
 				mapTypeId: google.maps.MapTypeId.ROADMAP
 			};
 
@@ -205,13 +211,19 @@ function onGeoSuccess(position){
 									mapTypeId: google.maps.MapTypeId.ROADMAP
 								};
 
-								var map2 = new google.maps.Map(document.getElementById("mapa-single"), mapoptions2);
+								setTimeout(function(){
 
-								markerGas = new google.maps.Marker({
-									position: new google.maps.LatLng( data.latitud, data.longitud ),
-									map: map2,
-									icon: "img/gas-marker.png"
-								});
+									var map2 = new google.maps.Map(document.getElementById("mapa-single"), mapoptions2);
+
+									markerGas = new google.maps.Marker({
+										position: new google.maps.LatLng( data.latitud, data.longitud ),
+										map: map2,
+										icon: "img/gas-marker.png"
+									});
+									map.setCenter(data.latitud, data.longitud);
+
+								},1000);
+								
 
 							});
 
@@ -338,7 +350,7 @@ function onGeoError(error){
     	<!-- Gasolinera -->
     	<div data-role="page" id="page3">
     		<div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
-    			<a class="ui-btn-left" href="#page1" data-transition="slidedown" data-icon="arrow-l" data-theme="a">Volver</a>
+    			<a id="regreso" class="ui-btn-left" href="#page1" data-transition="slidedown" data-icon="arrow-l" data-theme="a">Volver</a>
     			<h1>
     				<img src="img/logo-gasored.png" width="100">
     			</h1>
