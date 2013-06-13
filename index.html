@@ -190,18 +190,20 @@ function onGeoSuccess(position){
 								h2 = $("<h2></h2>");
 								h2.html(data.nombre);
 								p = $("<p></p>");
-								p.html(data.direccion)
-								ul = $("<ul></ul>");
+								p.html(data.direccion);
+								h3 = $("<h3>Contamos con:</h3>");
+								ul = $('<ul style="background-color: #ddd;padding:5px;"></ul>');
 								div = $('<div id="mapa-single" style="width:100%; height:300px"></div>');
 
 								for(x in data.features){
-									ul.append( "<li>" + data.features[x].nombre + "</li>" );
+									ul.append( '<li style="list-style-type: none;margin-left: 0px;"><img src="img/60/'+data.features[x].id+'.png" width="32px" style="margin-right: 10px;vertical-align:middle; margin-bottom:5px;"/>' + data.features[x].nombre + '</li>' );
 								}
 
 								$("#contenido-gas").empty();
 								$("#contenido-gas").append(img);
 								$("#contenido-gas").append(h2);
 								$("#contenido-gas").append(p);
+								$("#contenido-gas").append(h3);
 								$("#contenido-gas").append(ul);
 								$("#contenido-gas").append(div);
 
