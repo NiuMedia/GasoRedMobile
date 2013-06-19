@@ -73,8 +73,11 @@
 			}
 		}
 
-
+		function sapos_decoding(str){
+			return $("<div/>").html(str).text();
+		}
 		function displayBeneficios(){
+	
 			if(beneFlag==false){
 				jQuery("#beneList").empty();
 
@@ -82,14 +85,14 @@
 					if (bene.length>=3){
 						for(x=0;x <= 3; x++){
 							elementoBeneficio = jQuery("<li><h2>"+bene[x].title+"</h2><p>"+
-								bene[x].content+"</p></li>");
+								sapos_decoding(bene[x].content)+"</p></li>");
 							jQuery("#beneList").append(elementoBeneficio).trigger('create');
 						}
 					}
 					else {
 						for(x=0;x <= bene.length; x++){
 							elementoBeneficio = jQuery("<li><h2>"+bene[x].title+"</h2><p>"+
-								bene[x].content+"</p></li>");
+								sapos_decoding(bene[x].content)+"</p></li>");
 							jQuery("#beneList").append(elementoBeneficio).trigger('create');
 						}
 					}
@@ -107,14 +110,14 @@
 					if (tips.length>=3){
 						for(x=0;x <= 3; x++){
 							elementoTip = jQuery("<li><h2>"+tips[x].title+"</h2><p>"+
-								tips[x].content+"</p></li>");
-							jQuery("#tipsList").append(elementoBeneficio).trigger('create');
+								sapos_decoding( tips[x].content )+"</p></li>");
+							jQuery("#tipsList").append(elementoTip).trigger('create');
 						}
 					}
 					else {
 						for(x=0;x <= tips.length; x++){
 							elementoTip = jQuery("<li><h2>"+tips[x].title+"</h2><p>"+
-								tips[x].content+"</p></li>");
+								sapos_decoding( tips[x].content )+"</p></li>");
 							jQuery("#tipsList").append(elementoTip).trigger('create');
 						}
 					}
@@ -374,9 +377,11 @@ function onGeoError(error){
     		<h1>
     			Beneficios
     		</h1>
-    		<ul id="beneList" data-role="listview" style="margin: 0px;" data-theme="d">
+    		<div style="max-width: 500px; margin: 0 auto;">
+	    		<ul id="beneList" data-role="listview" style="margin: 0px;" data-theme="d">
 
-    		</ul>
+	    		</ul>
+    		</div>
     	</div>
     	<div data-role="footer" data-theme="a" data-position="fixed" data-tap-toggle="false">
 			<div data-role="navbar">
@@ -437,8 +442,10 @@ function onGeoError(error){
 		<h1>
 			GasoTips
 		</h1>
-		<ul id="tipsList" data-role="listview" style="margin: 0px;" data-theme="d">
-		</ul>
+    		<div style="max-width: 500px; margin: 0 auto;">
+				<ul id="tipsList" data-role="listview" style="margin: 0px;" data-theme="d">
+				</ul>
+			</div>
 	</div>
 	<div data-role="footer" data-theme="a" data-position="fixed" data-tap-toggle="false">
 		<div data-role="navbar">
