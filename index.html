@@ -40,10 +40,8 @@
             
 
 		$("#page1").live("pageshow",function(){
-                          alert('antes de mostrar el mapa');
 			displayMapa();
 			$("#refresh-home").click(function(){
-                                      alert('se refresca el mapa');
 				mapsFlag=false;
 				displayMapa();
 			});
@@ -75,14 +73,16 @@
 
 		function displayMapa(){
 			if(mapsFlag==false){
-                 alert('display mapa');
 				navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
 				mapsFlag=true;
 			}
 		}
 
-
+		function sapos_decoding(str){
+			return $("<div/>").html(str).text();
+		}
 		function displayBeneficios(){
+	
 			if(beneFlag==false){
 				jQuery("#beneList").empty();
 
@@ -90,14 +90,14 @@
 					if (bene.length>=3){
 						for(x=0;x <= 3; x++){
 							elementoBeneficio = jQuery("<li><h2>"+bene[x].title+"</h2><p>"+
-								bene[x].content+"</p></li>");
+								sapos_decoding(bene[x].content)+"</p></li>");
 							jQuery("#beneList").append(elementoBeneficio).trigger('create');
 						}
 					}
 					else {
 						for(x=0;x <= bene.length; x++){
 							elementoBeneficio = jQuery("<li><h2>"+bene[x].title+"</h2><p>"+
-								bene[x].content+"</p></li>");
+								sapos_decoding(bene[x].content)+"</p></li>");
 							jQuery("#beneList").append(elementoBeneficio).trigger('create');
 						}
 					}
@@ -108,37 +108,30 @@
 
 
 		function displayTips () {
-            alert('funcion de tips');
 			if(tipsFlag==false){
 				jQuery("#tipsList").empty();
-                 alert('vacia tips anteriores');
 
-            setTimeout(function(){
+            
 				jQuery.getJSON("http://108.166.164.132/~gasored/category/gasotips/?json",function(tips) {
-					
-                    alert('jala el json'+tips);
                                
                     if (tips.length>=3){
 						for(x=0;x <= 3; x++){
 							elementoTip = jQuery("<li><h2>"+tips[x].title+"</h2><p>"+
-								tips[x].content+"</p></li>");
-							jQuery("#tipsList").append(elementoBeneficio).trigger('create');
-                                alert('se crea '+tips[x].title);
+						sapos_decoding( tips[x].content )+"</p></li>");
+							jQuery("#tipsList").append(elementoTip).trigger('create');
 						}
 					}
 					else {
 						for(x=0;x <= tips.length; x++){
 							elementoTip = jQuery("<li><h2>"+tips[x].title+"</h2><p>"+
-								tips[x].content+"</p></li>");
+								sapos_decoding( tips[x].content )+"</p></li>");
 							jQuery("#tipsList").append(elementoTip).trigger('create');
 						}
 					}
 				});
-            },1000);
 
 				tipsFlag=true;
 			}
-             alert('termina funcion de Tips');
 		}
 
 function onGeoSuccess(position){
@@ -384,9 +377,11 @@ function onGeoError(error){
     		<h1>
     			Beneficios
     		</h1>
-    		<ul id="beneList" data-role="listview" style="margin: 0px;" data-theme="d">
+    		<div style="max-width: 500px; margin: 0 auto;">
+	    		<ul id="beneList" data-role="listview" style="margin: 0px;" data-theme="d">
 
-    		</ul>
+	    		</ul>
+    		</div>
     	</div>
     	<div data-role="footer" data-theme="a" data-position="fixed" data-tap-toggle="false">
 			<div data-role="navbar">
@@ -447,8 +442,10 @@ function onGeoError(error){
 		<h1>
 			GasoTips
 		</h1>
-		<ul id="tipsList" data-role="listview" style="margin: 0px;" data-theme="d">
-		</ul>
+    		<div style="max-width: 500px; margin: 0 auto;">
+				<ul id="tipsList" data-role="listview" style="margin: 0px;" data-theme="d">
+				</ul>
+			</div>
 	</div>
 	<div data-role="footer" data-theme="a" data-position="fixed" data-tap-toggle="false">
 		<div data-role="navbar">
